@@ -6,7 +6,7 @@ import {
 } from "h3";
 import defu from "defu";
 import { createRouter as createRadixRouter, toRouteMatcher } from "radix3";
-import { joinURL, withoutBase } from "ufo";
+import { joinURL, withQuery, getQuery, withoutBase } from "ufo";
 import { useRuntimeConfig } from "./config.mjs";
 const config = useRuntimeConfig();
 const _routeRulesMatcher = toRouteMatcher(
@@ -34,6 +34,9 @@ export function createRouteRulesHandler() {
           targetPath = withoutBase(targetPath, strpBase);
         }
         target = joinURL(target.slice(0, -3), targetPath);
+      } else if (event.path.includes("?")) {
+        const query = getQuery(event.path);
+        target = withQuery(target, query);
       }
       return proxyRequest(event, target, {
         fetch: $fetch.raw,

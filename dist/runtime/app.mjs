@@ -38,6 +38,7 @@ function createNitroApp() {
   globalThis.$fetch = $fetch;
   h3App.use(
     eventHandler((event) => {
+      event.context.nitro = event.context.nitro || {};
       const envContext = event.node.req.__unenv__;
       if (envContext) {
         Object.assign(event.context, envContext);
