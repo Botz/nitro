@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 import { defineCommand, runMain } from 'citty';
-
-const version = "2.3.3";
+import { v as version } from './shared/nitro.4f804c0e.mjs';
 
 const main = defineCommand({
   meta: {

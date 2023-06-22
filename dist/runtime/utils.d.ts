@@ -12,3 +12,4 @@ export declare function normalizeError(error: any): {
     statusMessage: any;
     message: any;
 };
+export declare function trapUnhandledNodeErrors(): void;

@@ -1,8 +1,8 @@
-import { N as Nitro, a as NitroConfig, b as NitroOptions, c as NitroEventHandler, d as NitroPreset } from './nitro-bbc45649.js';
-export { $ as $Fetch, j as AppConfig, A as AvailableRouterMethod, r as CacheEntry, s as CacheOptions, t as CachedEventHandlerOptions, C as CompressOptions, D as DevServerOptions, E as ExtractedRouteMethod, I as InternalApi, K as KebabCase, q as MatchedRoutes, M as MiddlewareOf, o as NitroDevEventHandler, g as NitroDynamicConfig, p as NitroErrorHandler, f as NitroFetchOptions, e as NitroFetchRequest, i as NitroHooks, m as NitroRouteConfig, n as NitroRouteRules, h as PrerenderGenerateRoute, P as PrerenderRoute, k as PublicAssetDir, R as ResponseCacheEntry, l as ServerAssetDir, S as StorageMounts, T as TypedInternalResponse } from './nitro-bbc45649.js';
+import { N as NitroRuntimeHooks, a as Nitro, b as NitroConfig, c as NitroOptions, d as NitroEventHandler, e as NitroPreset } from './nitro-01ca79d5.js';
+export { $ as $Fetch, l as AppConfig, A as AvailableRouterMethod, t as CacheEntry, u as CacheOptions, v as CachedEventHandlerOptions, C as CompressOptions, D as DevServerOptions, E as ExtractedRouteMethod, I as InternalApi, K as KebabCase, s as MatchedRoutes, M as MiddlewareOf, q as NitroDevEventHandler, h as NitroDynamicConfig, r as NitroErrorHandler, g as NitroFetchOptions, f as NitroFetchRequest, k as NitroHooks, o as NitroRouteConfig, p as NitroRouteRules, i as NitroRuntimeConfig, j as PrerenderGenerateRoute, P as PrerenderRoute, m as PublicAssetDir, x as RenderHandler, w as RenderResponse, R as ResponseCacheEntry, n as ServerAssetDir, S as StorageMounts, T as TypedInternalResponse } from './nitro-01ca79d5.js';
 import { WatchConfigOptions } from 'c12';
 import { Worker } from 'node:worker_threads';
-import { App, Router, H3Event } from 'h3';
+import { App, Router } from 'h3';
 import { ListenOptions, Listener } from 'listhen';
 import { FSWatcher } from 'chokidar';
 import { createCall, createFetch } from 'unenv/runtime/fetch/index';
@@ -16,6 +16,7 @@ import '@rollup/plugin-commonjs';
 import '@rollup/plugin-wasm';
 import 'unstorage';
 import 'http-proxy';
+import 'pkg-types';
 import '@vercel/nft';
 import 'rollup';
 import 'ofetch';
@@ -52,7 +53,7 @@ type Simplify<TType> = TType extends any[] | Date ? TType : {
 interface NitroApp {
     h3App: App;
     router: Router;
-    hooks: Hookable;
+    hooks: Hookable<NitroRuntimeHooks>;
     localCall: ReturnType<typeof createCall>;
     localFetch: ReturnType<typeof createFetch>;
 }
@@ -60,14 +61,6 @@ interface NitroApp {
 interface NitroAppPlugin {
     (nitro: NitroApp): void;
 }
-
-interface RenderResponse {
-    body: string;
-    statusCode: number;
-    statusMessage: string;
-    headers: Record<string, string>;
-}
-type RenderHandler = (event: H3Event) => Partial<RenderResponse> | Promise<Partial<RenderResponse>>;
 
 declare function prepare(nitro: Nitro): Promise<void>;
 declare function copyPublicAssets(nitro: Nitro): Promise<void>;
@@ -126,4 +119,4 @@ declare function prerender(nitro: Nitro): Promise<void>;
 
 declare function defineNitroPreset(preset: NitroPreset): NitroPreset;
 
-export { GLOB_SCAN_PATTERN, LoadConfigOptions, Nitro, NitroApp, NitroAppPlugin, NitroConfig, NitroDevServer, NitroEventHandler, NitroOptions, NitroPreset, NitroWorker, RenderHandler, RenderResponse, Serialize, Simplify, build, copyPublicAssets, createDevServer, createNitro, defineNitroPreset, loadOptions, prepare, prerender, scanHandlers, scanMiddleware, scanPlugins, scanRoutes, writeTypes };
+export { GLOB_SCAN_PATTERN, LoadConfigOptions, Nitro, NitroApp, NitroAppPlugin, NitroConfig, NitroDevServer, NitroEventHandler, NitroOptions, NitroPreset, NitroRuntimeHooks, NitroWorker, Serialize, Simplify, build, copyPublicAssets, createDevServer, createNitro, defineNitroPreset, loadOptions, prepare, prerender, scanHandlers, scanMiddleware, scanPlugins, scanRoutes, writeTypes };
